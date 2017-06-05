@@ -1,15 +1,36 @@
 class Game(object):
     def __init__(self):
         self.score = 0
-        self.pendant_strikes = 0
+        self.last_roll = 0
+        self.roll = 1
+        self.bonus = 0
+        self.next_turn_bonus = 0
 
     def record_roll(self, num_pins_knocked):
-        if self.pendant_strikes > 0:
-            self.score += num_pins_knocked * self.pendant_strikes
-            self.pendant_strikes -= 1
-        self.score += num_pins_knocked
-        if num_pins_knocked == 10:
-            self.pendant_strikes += 1
+
+        self.score += ((self.bonus + 1) * num_pins_knocked)
+        print self.score, "self.score", self.bonus, self.next_turn_bonus
+        self.bonus = self.next_turn_bonus
+        self.next_turn_bonus = 0
+        print self.bonus, self.next_turn_bonus
+        if self.roll >= 19:
+            pass
+        elif self.roll % 2 == 0 or self.roll == 20:
+            spare = self.last_roll + num_pins_knocked
+
+            if spare == 10:
+                self.bonus += 1
+
+        else:
+            if num_pins_knocked == 10:
+                self.roll += 1
+                self.bonus += 1
+                self.next_turn_bonus += 1
+                print self.score, "score", self.bonus, self.next_turn_bonus
+        self.last_roll = num_pins_knocked
+        self.roll += 1
+
+
 
     def get_score(self):
         return self.score
