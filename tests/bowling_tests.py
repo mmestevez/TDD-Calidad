@@ -35,3 +35,33 @@ class GameTests(unittest.TestCase):
 
         # Assert
         self.assertEqual(30, result)
+
+    def test_get_score__two_rolls_with_3_pins_knocked__returns_6(self):
+        # Arrange
+        game = bowling.Game()
+        game.record_roll(num_pins_knocked=3)
+        game.record_roll(num_pins_knocked=3)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+        game.record_roll(num_pins_knocked=0)
+
+        # Act
+        result = game.get_score()
+
+        # Assert
+        self.assertEqual(6, result)
+
